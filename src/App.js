@@ -14,6 +14,8 @@ function App() {
     { name: 'landscape',  description: 'Fields, farmhouses, waterfalls, and the beauty of nature' },
   ]);
 
+  // SPA state setting
+  const [contactSelected, setContactSelected] = useState(false);
   // set state
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
@@ -23,11 +25,19 @@ function App() {
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
-        <ContactForm></ContactForm>
-        <Gallery currentCategory={currentCategory}></Gallery>
-        <About></About>
+        {/*Conditionally to switch between Gallery and About page, and Contact Page*/}
+        {!contactSelected ? (
+          <>
+            <Gallery currentCategory={currentCategory}></Gallery>
+            <About></About>
+            </>
+        ) : (
+          <ContactForm></ContactForm>
+        )}
       </main>
     </div>
   );
